@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Tracks daily swipe count for non-premium users
+model UserStats {
+  id                  Int      @id @default(autoincrement())
+  userAddress         String   @unique
+  dailySwipeCount     Int      @default(0)
+  lastSwipeTimestamp  DateTime @default(now())
+}
+
+// Records a "like" from one user to another
+model Like {
+  id            Int      @id @default(autoincrement())
+  likerAddress  String
+  likedAddress  String
+  createdAt     DateTime @default(now())
+
+  @@unique([likerAddress, likedAddress]) // Prevents a user from liking the same person twice
+}
+
+// Stores notifications for new likes and new matches
+model Notification {
+  id               Int      @id @default(autoincrement())
+  recipientAddress String   
+  actorAddress     String   
+  type             String   // "NEW_LIKE" or "NEW_MATCH"
+  isRead           Boolean  @default(false)
+  createdAt        DateTime @default(now())
+}
+
+// Stores a mutual match between two users
+model Connection {
+  id            Int      @id @default(autoincrement())
+  userA_address String
+  userB_address String
+  createdAt     DateTime @default(now())
+  
+  @@unique([userA_address, userB_address])
+}
