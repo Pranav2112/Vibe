@@ -214,10 +214,14 @@ function Browse() {
         </div>
         
         {currentProfileAddress && (
+
+
           <div className="flex gap-8 mt-8">
-            <button onClick={() => handleAction('left', currentProfileAddress)} className="bg-white text-red-500 border-2 border-red-500 rounded-full w-20 h-20 flex items-center justify-center text-4xl font-bold transition transform hover:scale-110">❌</button>
-            <button onClick={() => handleAction('right', currentProfileAddress)} className="bg-white text-green-500 border-2 border-green-500 rounded-full w-20 h-20 flex items-center justify-center text-4xl font-bold transition transform hover:scale-110">💚</button>
+            <button onClick={() => handleAction('left', currentProfileAddress)} className="bg-white text-red-500 border-1 border-red-500 rounded-full w-20 h-20 flex items-center justify-center text-3xl font-bold transition transform hover:scale-110">❌</button>
+            <button onClick={() => handleAction('right', currentProfileAddress)} className="bg-white text-green-500 border-1 border-green-500 rounded-full w-20 h-20 flex items-center justify-center text-4xl font-bold transition transform hover:scale-110">❤️</button>
           </div>
+
+          
         )}
       </div>
     </>
